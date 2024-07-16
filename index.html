@@ -24,29 +24,15 @@
             <input type="number" id="pages" name="pages">
         </div>
         <div>
-            <span>Have you read it?: </span>
-            <input type="radio" id="is-read" name="isRead" value="yes">
-            <label for="is-read">Yes</label>
-            <input type="radio" id="is-read" name="isRead" value="no">
-            <label for="is-read">No</label>
+            <label for="is-read">Have you read it?</label>
+            <input type="checkbox" id="is-read" name="isRead">
         </div>
         <button type="submit">Add</button>
     </form>
 <br>
-<br><br>
-    <table>
-        <caption><h1>The Library</h1></caption>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Page Count</th>
-                <th>Read?</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+<br>
+<br>
+    <div id="bookList">
+    </div>
 </body>
 </html>

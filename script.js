@@ -1,24 +1,24 @@
 
 const form = document.querySelector('form');
-const tableBody = document.querySelector('tbody');
+const bookList = document.querySelector('#bookList');
 // const submit = document.querySelector('button');
 
 let library = [];
 
-const book1 = new Book('monk sold ferrari', 'some monk', 123, 'No');
+const book1 = new Book('monk sold ferrari', 'some monk', 123, 'no');
 library.push(book1);
-addBookToTable(book1);
 
 const book2 = new Book('Rich poor dads', 'someones son', 321, 'No');
 library.push(book2);
-addBookToTable(book2);
+
+showLibrary();
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(form);
     const book = Object.fromEntries(formData);
     library.push(book);
-    addBookToTable(book);
+    showLibrary();
     form.reset();
 });
 
@@ -30,23 +30,35 @@ function Book (title, author, pages, isRead) {
     this.info = () => `the book titled ${this.title} probably written by ${this.author} has about ${this.pages} pages.`
 }
 
-function addBookToTable(book) {
+function showLibrary() {
 
-    const tableRow = document.createElement('tr');
-    const td1 = document.createElement('td');
-    const td2 = document.createElement('td');
-    const td3 = document.createElement('td');
-    const td4 = document.createElement('td');
-    td1.textContent = book.title;
-    td2.textContent = book.author;
-    td3.textContent = book.pages;
-    td4.textContent = book.isRead;
-    tableRow.append(td1, td2, td3, td4);
-    tableBody.appendChild(tableRow);
+    clear(bookList);
+
+    for(let i = 0; i < library.length; i++) {
+
+        const bookCase = document.createElement('div');
+        const bookTitle = document.createElement('h3');
+        bookTitle.textContent = library[i].title;
+        const bookDetail = document.createElement('p');
+        bookDetail.textContent = `This book is written by ${library[i].author} and consists of ${library[i].pages} pages.`;
+        const read = document.createElement('p');
+        library[i].isRead === 'on' ? read.textContent = 'You have read it' : read.textContent = 'You have not read it yet';
+        const delButton = document.createElement('button');
+        delButton.textContent = 'Remove';
+        delButton.onclick = () => {
+            library.splice(i, 1);
+            showLibrary();
+        }
+
+        bookCase.append(bookTitle, bookDetail, read, delButton);
+        bookList.appendChild(bookCase);
+    }
 }
 
-// function showData(data) {
-
-//     const entries = Object.fromEntries(data);
-//     console.log(entries);
-// }
+function clear(node) {
+    let child = node.firstChild;
+    while(child) {
+        node.removeChild(child);
+        child = node.firstChild;
+    }
+}
