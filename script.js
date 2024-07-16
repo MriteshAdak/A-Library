@@ -1,17 +1,21 @@
-
+let library = [];
 const form = document.querySelector('form');
 const bookList = document.querySelector('#bookList');
-// const submit = document.querySelector('button');
+const addBook = document.querySelector('#addBook');
+const formDialog = document.querySelector('dialog');
+const cancelBtn = document.querySelector('#cancel');
 
-let library = [];
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 
-const book1 = new Book('monk sold ferrari', 'some monk', 123, 'no');
-library.push(book1);
+addBook.onclick = () => {
+    formDialog.showModal();
+};
 
-const book2 = new Book('Rich poor dads', 'someones son', 321, 'No');
-library.push(book2);
-
-showLibrary();
+cancelBtn.onclick = () => {
+    formDialog.close();
+};
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -20,6 +24,7 @@ form.addEventListener('submit', (event) => {
     library.push(book);
     showLibrary();
     form.reset();
+    formDialog.close();
 });
 
 function Book (title, author, pages, isRead) {
@@ -27,7 +32,6 @@ function Book (title, author, pages, isRead) {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-    this.info = () => `the book titled ${this.title} probably written by ${this.author} has about ${this.pages} pages.`
 }
 
 function showLibrary() {
@@ -39,10 +43,11 @@ function showLibrary() {
         const bookCase = document.createElement('div');
         const bookTitle = document.createElement('h3');
         bookTitle.textContent = library[i].title;
+        bookTitle.style.textDecoration = 'underline';
         const bookDetail = document.createElement('p');
-        bookDetail.textContent = `This book is written by ${library[i].author} and consists of ${library[i].pages} pages.`;
-        const read = document.createElement('p');
-        library[i].isRead === 'on' ? read.textContent = 'You have read it' : read.textContent = 'You have not read it yet';
+        bookDetail.textContent = `This book is written by ${library[i].author} and has about ${library[i].pages} pages.`;
+        const read = document.createElement('h4');
+        library[i].isRead === 'on' ? read.textContent = 'Read' : read.textContent = 'Unread';
         const delButton = document.createElement('button');
         delButton.textContent = 'Remove';
         delButton.onclick = () => {

@@ -1,1 +1,76 @@
 /* styling for library if needed */
+
+::backdrop {
+    background-image: linear-gradient(
+      45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green
+    );
+    opacity: 0.25;
+}
+  
+body {
+    background-image: url(assets/14.jpg);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Rubik', sans-serif;
+}
+
+button {
+    border-radius: 5px;
+    color: beige;
+    background-color: black;
+    height: 2em;
+    width: auto;
+    font-family: inherit;
+}
+
+.addBook, #bookList {
+    max-width: 100%;
+    background-color: rgb(255, 255, 255, 0.25);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#bookList {
+    font-family: inherit;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 200px);
+}
+
+.addBook {
+    display: flex;
+    justify-content: center;
+}
+
+#bookList div {
+    background-color: rgb(255, 255, 255, 0.5);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+dialog {
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+form {
+    font-family: inherit;
+    background-color: inherit;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
